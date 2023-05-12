@@ -1,5 +1,5 @@
 
-<%@ page import="model.Point" %>
+<%@ page import="com.lab2.model.Point" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- <%@ page buffer="20kb" autoFlush="false" %> -->

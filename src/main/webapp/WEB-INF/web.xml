@@ -7,11 +7,11 @@
 <display-name>Basic</display-name>
   <servlet>
     <servlet-name>MyController</servlet-name>
-    <servlet-class>servlet.ServletController</servlet-class>
+    <servlet-class>com.lab2.servlet.ServletController</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AreaCheck</servlet-name>
-    <servlet-class>servlet.ServletAreaCheck</servlet-class>
+    <servlet-class>com.lab2.servlet.ServletAreaCheck</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MyController</servlet-name>

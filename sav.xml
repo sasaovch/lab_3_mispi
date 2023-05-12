@@ -98,3 +98,77 @@
 <!--            <classes dir = "${build.dir}/web"/>-->
 <!--        </war>-->
 <!--    </target>-->
+
+
+<target name="deploy" depends="war">
+    <!--        <delete file="/Users/sasaovch/Development/ITMO/ant/wildfly-28.0.0.Final/standalone/deployments/lab.war" />-->
+    <copy file="lab1.war" todir="/Users/sasaovch/Development/ITMO/ant/wildfly-28.0.0.Final/standalone/deployments"/>
+</target>
+
+<property name="servers.production" value="helios.cs.ifmo.ru"/>
+
+<target  name="ssh">
+<echo message="Starting file transfer to    s336768@${servers.production}" />
+<!--        <exec dir="." executable="rsync" os="Mac OS X" failonerror="true">-->
+<!--            <arg value="-p 2222" />-->
+<!--            <arg value="-e ssh" />-->
+<!--            <arg value="lab1.war" />-->
+<!--            <arg value="${user.name}@${servers.production}:~" />-->
+<!--        </exec>-->
+<scp file="lab1.war" todir="s336768:aknV%1525@helios.cs.ifmo.ru:" port="2222"/>
+<!--        <sshexec host="${servers.production}"-->
+<!--                 username="s336768"-->
+<!--                 password="aknV%1525"-->
+<!--                 port="2222"-->
+<!--                 command="touch somefile"/>-->
+</target>
+
+
+<classes dir = "${classes.dir}"/>
+        </war>
+        </target>
+
+<target name="deploy" depends="war">
+<!--        <delete file="/Users/sasaovch/Development/ITMO/ant/wildfly-28.0.0.Final/standalone/deployments/lab.war" />-->
+<copy file="lab1.war" todir="/Users/sasaovch/Development/ITMO/ant/wildfly-28.0.0.Final/standalone/deployments"/>
+</target>
+
+<property name="servers.production" value="helios.cs.ifmo.ru"/>
+
+<target  name="ssh">
+<echo message="Starting file transfer to    s336768@${servers.production}" />
+<!--        <exec dir="." executable="rsync" os="Mac OS X" failonerror="true">-->
+<!--            <arg value="-p 2222" />-->
+<!--            <arg value="-e ssh" />-->
+<!--            <arg value="lab1.war" />-->
+<!--            <arg value="${user.name}@${servers.production}:~" />-->
+<!--        </exec>-->
+<scp file="lab1.war" todir="s336768:aknV%1525@helios.cs.ifmo.ru:" port="2222"/>
+<!--        <sshexec host="${servers.production}"-->
+<!--                 username="s336768"-->
+<!--                 password="aknV%1525"-->
+<!--                 port="2222"-->
+<!--                 command="touch somefile"/>-->
+</target>
+
+<path id="junit">
+<fileset dir="./lib" includes="**/*.jar"/>
+<!--        <fileset dir="${jboss.home}/bin/client">-->
+<!--            <include name="**/*.jar"/>-->
+<!--        </fileset>-->
+</path>
+<path id="application" location="${build.dir}/${ant.project.name}.jar"/>
+<target name="run" depends="jar">
+<java fork="true" classname="${main-class}">
+    <classpath>
+        <!--                <path refid="classpath"/>-->
+        <path refid="application"/>
+    </classpath>
+</java>
+</target>
+<target name="junit" depends="jar">
+<junit printsummary="yes" showoutput="true">
+    <classpath>
+
+        <path refid="application"/>
+        <path refid="junit"/>

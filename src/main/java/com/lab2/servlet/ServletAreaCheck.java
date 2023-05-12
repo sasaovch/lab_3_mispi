@@ -1,4 +1,4 @@
-package servlet;
+package com.lab2.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,21 +12,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 
-import model.Point;
-import model.TablePoint;
+import com.lab2.model.Point;
+import com.lab2.model.TablePoint;
 
 public class ServletAreaCheck extends HttpServlet {
 
     private Gson gson = new Gson();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext context = getServletContext();
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        context.log("ServletAreaCheck: doGet");
 
         Double x = Double.parseDouble(req.getParameter("x"));
         Double y = Double.parseDouble(req.getParameter("y"));

@@ -4,7 +4,7 @@
 
     <target name="resolve" description="resolve dependencies">
         <ivy:resolve/>
-        <ivy:cachepath pathid="new.classpath"/>
+        <ivy:cachepath pathid="dependency"/>
     </target>
 
     <target name="clean">
@@ -20,9 +20,8 @@
     <target name="compile" depends="prepare, resolve">
         <javac srcdir="${src.dir}"
                destdir="${classes.dir}">
-            <classpath refid="new.classpath"/>
+            <classpath refid="dependency"/>
         </javac>
-
         <copy todir="${classes.dir}">
             <fileset dir="${src.dir}" excludes="**/*.java"/>
         </copy>
@@ -31,7 +30,7 @@
     <target name="build" depends="compile">
         <jar destfile="${build.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
-                <attribute name="Main-Class" value="Main"/>
+                <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
     </target>
@@ -41,21 +40,26 @@
             <fileset dir="${webapp.dir}">
                 <include name="**/*.*"/>
             </fileset>
-
             <classes dir="${classes.dir}"/>
         </war>
     </target>
 
+    <path id="junit">
+        <fileset dir="./lib" includes="**/*.jar"/>
+    </path>
+
     <target name="junit" depends="build">
         <junit printsummary="yes">
             <classpath>
-
+                <path refid="junit"/>
                 <path refid="application"/>
                 <path refid="classpath"/>
             </classpath>
+            <formatter type="plain" />
 
             <batchtest fork="yes">
-                <fileset dir="${src.dir}" includes="**/*Test.java"/>
+                <path refid="dependency"/>
+                <fileset dir="${java.dir}" includes="**/*Test.java"/>
             </batchtest>
         </junit>
     </target>
