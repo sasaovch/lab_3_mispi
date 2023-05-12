@@ -1,5 +1,7 @@
 /.vscode
 /.apt*
 /target/*
+/.idea
 package-lock.json
+build
 persistence.xml

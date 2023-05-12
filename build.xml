@@ -1,50 +1,10 @@
-<!--<project xmlns:ivy="antlib:org.apache.ivy.ant" name="lab_3_web" basedir="." default="main">-->
-<project name="test" default="resolve" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="Lab3" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
 
-    <property name="src.dir"     value="src"/>
-    <property name="build.dir"   value="build"/>
-    <property name="web.dir" value="${build.dir}"/>
-    <property name="classes.dir" value="${build.dir}/classes"/>
-    <property name="webapp.dir" value="${src.dir}/main/webapp"/>
-    <property name="webapp.inf" value="${webapp.dir}/WEB-INF"/>
-<!--    <property name="jar.dir"     value="${build.dir}/jar"/>-->
-<!--    <property name="jboss.home" value="lib/wildfly-28.0.0.Final"/>-->
-
-<!--    <property name="lib.dir"     value="lib"/>-->
-
-<!--    <path id="classpath">-->
-<!--        <fileset dir="${lib.dir}" includes="**/*.jar"/>-->
-<!--        <fileset dir="${jboss.home}/bin/client">-->
-<!--            <include name="**/*.jar"/>-->
-<!--        </fileset>-->
-<!--    </path>-->
-
-<!--    <path id="wildfly">-->
-<!--        <fileset dir="${jboss.home}/bin/client">-->
-<!--            <include name="**/*.jar"/>-->
-<!--        </fileset>-->
-<!--    </path>-->
-
-<!--    <ivy-module>-->
-<!--        <info organisation="com.mispi.lab"/>-->
-<!--        <dependencies>-->
-<!--            &lt;!&ndash; https://mvnrepository.com/artifact/com.google.code.gson/gson &ndash;&gt;-->
-<!--            <dependency org="com.google.code.gson" name="gson" rev="2.9.1"/>-->
-<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;-->
-<!--            <dependency org="org.slf4j" name="slf4j-simple" rev="2.0.2"/>-->
-<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.projectlombok/lombok &ndash;&gt;-->
-<!--            <dependency org="org.projectlombok" name="lombok" rev="1.18.24"/>-->
-<!--            &lt;!&ndash; https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api &ndash;&gt;-->
-<!--            <dependency org="javax.servlet" name="javax.servlet-api" rev="4.0.1"/>-->
-<!--            &lt;!&ndash; https://mvnrepository.com/artifact/javax.ejb/javax.ejb-api &ndash;&gt;-->
-<!--            <dependency org="javax.ejb" name="javax.ejb-api" rev="3.2.2"/>-->
-
-<!--        </dependencies>-->
-<!--    </ivy-module>-->
+    <loadproperties srcfile="ant.properties"/>
 
     <target name="resolve" description="resolve dependencies">
         <ivy:resolve/>
-        <ivy:cachepath pathid="new.classpath" />
+        <ivy:cachepath pathid="new.classpath"/>
     </target>
 
     <target name="clean">
@@ -52,7 +12,7 @@
     </target>
 
     <target name="prepare" depends="clean">
-        <delete dir="${build.dir}"  />
+        <delete dir="${build.dir}"/>
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${classes.dir}"/>
     </target>
@@ -60,16 +20,15 @@
     <target name="compile" depends="prepare, resolve">
         <javac srcdir="${src.dir}"
                destdir="${classes.dir}">
-        <classpath refid="new.classpath" />
-    </javac>
-        <!--               classpathref="classpath"/>-->
+            <classpath refid="new.classpath"/>
+        </javac>
+
         <copy todir="${classes.dir}">
             <fileset dir="${src.dir}" excludes="**/*.java"/>
         </copy>
     </target>
 
-    <target name="jar" depends="compile">
-<!--        <mkdir dir="${}"/>-->
+    <target name="build" depends="compile">
         <jar destfile="${build.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="Main"/>
@@ -78,121 +37,20 @@
     </target>
 
     <target name="war" depends="compile">
-        <war destfile = "lab1.war" webxml = "${webapp.inf}/web.xml">
-            <fileset dir = "${webapp.dir}">
-                <include name = "**/*.*"/>
+        <war destfile="${build.dir}/${ant.project.name}.war" webxml="${webapp.inf}/web.xml">
+            <fileset dir="${webapp.dir}">
+                <include name="**/*.*"/>
             </fileset>
 
-<!--            <lib dir = "thirdpartyjars">-->
-<!--                <exclude name = "portlet.jar"/>-->
-<!--            </lib>-->
-
-            <classes dir = "${classes.dir}"/>
+            <classes dir="${classes.dir}"/>
         </war>
     </target>
 
-    <target name="deploy" depends="war">
-<!--        <delete file="/Users/sasaovch/Development/ITMO/ant/wildfly-28.0.0.Final/standalone/deployments/lab.war" />-->
-        <copy file="lab1.war" todir="/Users/sasaovch/Development/ITMO/ant/wildfly-28.0.0.Final/standalone/deployments"/>
-    </target>
-
-    <property name="servers.production" value="helios.cs.ifmo.ru"/>
-
-    <target  name="ssh">
-        <echo message="Starting file transfer to    s336768@${servers.production}" />
-<!--        <exec dir="." executable="rsync" os="Mac OS X" failonerror="true">-->
-<!--            <arg value="-p 2222" />-->
-<!--            <arg value="-e ssh" />-->
-<!--            <arg value="lab1.war" />-->
-<!--            <arg value="${user.name}@${servers.production}:~" />-->
-<!--        </exec>-->
-        <scp file="lab1.war" todir="s336768:aknV%1525@helios.cs.ifmo.ru:" port="2222"/>
-<!--        <sshexec host="${servers.production}"-->
-<!--                 username="s336768"-->
-<!--                 password="aknV%1525"-->
-<!--                 port="2222"-->
-<!--                 command="touch somefile"/>-->
-    </target>
-
-
-<!--    <ivy-module>-->
-<!--        <info organisation="org.apache" module="hello-ivy"/>-->
-<!--        <dependencies>-->
-<!--            <dependency org="commons-lang" name="commons-lang" rev="2.0"/>-->
-<!--            <dependency org="commons-cli" name="commons-cli" rev="1.0"/>-->
-<!--        </dependencies>-->
-<!--    </ivy-module>-->
-
-
-
-<!--    <target name = "build-war">-->
-<!--        <war destfile = "${war.name}" webxml = "${web.dir}/web.xml">-->
-<!--            <fileset dir = "${src.dir}">-->
-<!--                <include name = "**/*.*"/>-->
-<!--            </fileset>-->
-<!--            -->
-<!--            <lib dir = "thirdpartyjars">-->
-<!--                <exclude name = "portlet.jar"/>-->
-<!--            </lib>-->
-<!--            -->
-<!--            <classes dir = "${build.dir}/web"/>-->
-<!--        </war>-->
-<!--    </target>-->
-
-<!--      <target name="war" depends="compile">-->
-<!--    <war destfile="${build.dir}\${war.name}" -->
-<!--    	               webxml = "${web.dir}/web.xml">-->
-<!--    	<classes dir="WebRoot/WEB-INF/classes"/>-->
-<!--    	<fileset dir="${dist.dir}"/>-->
-<!--    	<lib dir="${lib.dir}"/>-->
-<!--      <manifest>-->
-<!--        <attribute name="AntCreateWar" value="ant.Create.War" />-->
-<!--      </manifest>-->
-<!--    </war>-->
-<!--  </target>-->
- 
-  <!-- Defualt target to run all targets-->
-<!--  <target name="mainTarget" depends="compile, war">-->
-<!--    <description>Main target</description>-->
-<!--  </target>-->
-
-<!--    <target name="jar" depends="compile">-->
-<!--        <mkdir dir="${jar.dir}"/>-->
-<!--        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">-->
-<!--            <manifest>-->
-<!--                <attribute name="Main-Class" value="${main-class}"/>-->
-<!--            </manifest>-->
-<!--        </jar>-->
-<!--    </target>-->
-
-<!--    <target name="war" depends="jar">-->
-<!--        <war destfile = "fax.war" webxml = "${web.dir}/web.xml">-->
-<!--            <fileset dir = "${web.dir}/WebContent">-->
-<!--                <include name = "**/*.*"/>-->
-<!--            </fileset>-->
-
-<!--            <lib dir = "thirdpartyjars">-->
-<!--                <exclude name = "portlet.jar"/>-->
-<!--            </lib>-->
-
-<!--            <classes dir = "${build.dir}/web"/>-->
-<!--        </war>-->
-<!--    </target>-->
-
-    <target name="run" depends="jar">
-        <java fork="true" classname="${main-class}">
-            <classpath>
-                <path refid="classpath"/>
-                <path refid="application"/>
-            </classpath>
-        </java>
-    </target>
-
-    <target name="junit" depends="jar">
+    <target name="junit" depends="build">
         <junit printsummary="yes">
             <classpath>
-                              
-            <path refid="application"/>
+
+                <path refid="application"/>
                 <path refid="classpath"/>
             </classpath>
 
@@ -201,8 +59,18 @@
             </batchtest>
         </junit>
     </target>
-    <target name="clean-build" depends="clean,jar"/>
 
-    <target name="main" depends="clean,run"/>
+    <target name="xml">
+        <xmlvalidate>
+            <dtd location="public/web-app_2_3.dtd"
+                 publicid="-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"/>
+            <fileset dir="${src.dir}" includes="**/*.xml"/>
+        </xmlvalidate>
+    </target>
 
+    <target name="env">
+        <java jar="${build.dir}/${ant.project.name}.jar" fork="true">
+            <jvmarg value="${jvm.args}"/>
+        </java>
+    </target>
 </project>

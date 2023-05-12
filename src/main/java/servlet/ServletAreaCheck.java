@@ -79,9 +79,6 @@ public class ServletAreaCheck extends HttpServlet {
             return true;
         } else if (x <= 0 && y < 0 && x >= -r && y >= -r) {
             return true;
-        } else if (x > 0 && y <= 0 && (2 * x - r) <= y) {
-            return true;
-        }
-        return false;
+        } else return x > 0 && y <= 0 && (2 * x - r) <= y;
     }
 }
