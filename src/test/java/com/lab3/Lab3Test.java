@@ -1,16 +1,16 @@
-package test;
+package com.lab3;
 
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
+import org.junit.Assert;
 
-public class Lab2Test {
+public class Lab3Test {
     @Test
     public void testNothing() {
     }
 
     @Test
     public void testWillAlwaysFail() {
-        fail("An error message");
+        Assert.fail("An error message");
     }
 }

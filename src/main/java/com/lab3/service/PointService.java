@@ -1,6 +1,6 @@
-package com.lab2.service;
+package com.lab3.service;
 
-import com.lab2.model.TablePoint;
+import com.lab3.model.TablePoint;
 
 public class PointService {
     private TablePoint tablePoint;

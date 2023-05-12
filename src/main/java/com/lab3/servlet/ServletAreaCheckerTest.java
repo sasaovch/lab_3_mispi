@@ -1,4 +1,4 @@
-package com.lab2.servlet;
+package com.lab3.servlet;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;

@@ -1,4 +1,4 @@
-package com.lab2.servlet;
+package com.lab3.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,8 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.ServletException;
 
-import com.lab2.model.Point;
-import com.lab2.model.TablePoint;
+import com.lab3.model.Point;
+import com.lab3.model.TablePoint;
 
 public class ServletAreaCheck extends HttpServlet {
 

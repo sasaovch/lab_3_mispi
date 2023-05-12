@@ -2,6 +2,8 @@
 
     <loadproperties srcfile="ant.properties"/>
 
+    <path id="application" location="${build.dir}/${ant.project.name}.jar"/>
+
     <target name="resolve" description="resolve dependencies">
         <ivy:resolve/>
         <ivy:cachepath pathid="dependency"/>
@@ -44,22 +46,16 @@
         </war>
     </target>
 
-    <path id="junit">
-        <fileset dir="./lib" includes="**/*.jar"/>
-    </path>
-
     <target name="junit" depends="build">
         <junit printsummary="yes">
             <classpath>
-                <path refid="junit"/>
                 <path refid="application"/>
-                <path refid="classpath"/>
+                <path refid="dependency"/>
             </classpath>
-            <formatter type="plain" />
 
             <batchtest fork="yes">
                 <path refid="dependency"/>
-                <fileset dir="${java.dir}" includes="**/*Test.java"/>
+                <fileset dir="${test.dir}" includes="**/*Test.java"/>
             </batchtest>
         </junit>
     </target>

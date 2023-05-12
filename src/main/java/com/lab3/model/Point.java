@@ -1,4 +1,4 @@
-package com.lab2.model;
+package com.lab3.model;
 
 import lombok.Data;
 import lombok.NonNull;

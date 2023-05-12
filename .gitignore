@@ -1,7 +1,7 @@
-/.vscode
-/.apt*
-/target/*
-/.idea/
-package-lock.json
+.vscode/
+.apt
+target/
+.idea/
 build/
+package-lock.json
 persistence.xml

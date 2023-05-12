@@ -1,3 +1,5 @@
+package com.lab3;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.List;

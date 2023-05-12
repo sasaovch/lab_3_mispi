@@ -1,9 +1,9 @@
-package com.lab2.DTO;
+package com.lab3.DTO;
 
 import java.util.List;
 
 import lombok.Data;
-import com.lab2.model.Point;
+import com.lab3.model.Point;
 
 @Data
 public class ResponseDTO {

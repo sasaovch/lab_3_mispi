@@ -1,4 +1,4 @@
-package com.lab2.servlet;
+package com.lab3.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpSession;
-import com.lab2.model.TablePoint;
+import com.lab3.model.TablePoint;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
