@@ -68,7 +68,7 @@
         </xmlvalidate>
     </target>
 
-    <target name="env">
+    <target name="env" depends="build">
         <java jar="${build.dir}/${ant.project.name}.jar" fork="true">
             <jvmarg value="${jvm.args}"/>
         </java>

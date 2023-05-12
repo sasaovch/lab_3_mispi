@@ -1,0 +1,100 @@
+<!--    <property name="jar.dir"     value="${build.dir}/jar"/>-->
+<!--    <property name="jboss.home" value="lib/wildfly-28.0.0.Final"/>-->
+
+<!--    <property name="lib.dir"     value="lib"/>-->
+
+<!--    <path id="classpath">-->
+<!--        <fileset dir="${lib.dir}" includes="**/*.jar"/>-->
+<!--        <fileset dir="${jboss.home}/bin/client">-->
+<!--            <include name="**/*.jar"/>-->
+<!--        </fileset>-->
+<!--    </path>-->
+
+<!--    <path id="wildfly">-->
+<!--        <fileset dir="${jboss.home}/bin/client">-->
+<!--            <include name="**/*.jar"/>-->
+<!--        </fileset>-->
+<!--    </path>-->
+
+<!--    <ivy-module>-->
+<!--        <info organisation="com.mispi.lab"/>-->
+<!--        <dependencies>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/com.google.code.gson/gson &ndash;&gt;-->
+<!--            <dependency org="com.google.code.gson" name="gson" rev="2.9.1"/>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;-->
+<!--            <dependency org="org.slf4j" name="slf4j-simple" rev="2.0.2"/>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.projectlombok/lombok &ndash;&gt;-->
+<!--            <dependency org="org.projectlombok" name="lombok" rev="1.18.24"/>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api &ndash;&gt;-->
+<!--            <dependency org="javax.servlet" name="javax.servlet-api" rev="4.0.1"/>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/javax.ejb/javax.ejb-api &ndash;&gt;-->
+<!--            <dependency org="javax.ejb" name="javax.ejb-api" rev="3.2.2"/>-->
+
+<!--        </dependencies>-->
+<!--    </ivy-module>-->
+
+
+
+<!--    <ivy-module>-->
+<!--        <info organisation="org.apache" module="hello-ivy"/>-->
+<!--        <dependencies>-->
+<!--            <dependency org="commons-lang" name="commons-lang" rev="2.0"/>-->
+<!--            <dependency org="commons-cli" name="commons-cli" rev="1.0"/>-->
+<!--        </dependencies>-->
+<!--    </ivy-module>-->
+
+
+
+<!--    <target name = "build-war">-->
+<!--        <war destfile = "${war.name}" webxml = "${web.dir}/web.xml">-->
+<!--            <fileset dir = "${src.dir}">-->
+<!--                <include name = "**/*.*"/>-->
+<!--            </fileset>-->
+<!--            -->
+<!--            <lib dir = "thirdpartyjars">-->
+<!--                <exclude name = "portlet.jar"/>-->
+<!--            </lib>-->
+<!--            -->
+<!--            <classes dir = "${build.dir}/web"/>-->
+<!--        </war>-->
+<!--    </target>-->
+
+<!--      <target name="war" depends="compile">-->
+<!--    <war destfile="${build.dir}\${war.name}" -->
+<!--    	               webxml = "${web.dir}/web.xml">-->
+<!--    	<classes dir="WebRoot/WEB-INF/classes"/>-->
+<!--    	<fileset dir="${dist.dir}"/>-->
+<!--    	<lib dir="${lib.dir}"/>-->
+<!--      <manifest>-->
+<!--        <attribute name="AntCreateWar" value="ant.Create.War" />-->
+<!--      </manifest>-->
+<!--    </war>-->
+<!--  </target>-->
+
+<!-- Defualt target to run all targets-->
+<!--  <target name="mainTarget" depends="compile, war">-->
+<!--    <description>Main target</description>-->
+<!--  </target>-->
+
+<!--    <target name="jar" depends="compile">-->
+<!--        <mkdir dir="${jar.dir}"/>-->
+<!--        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">-->
+<!--            <manifest>-->
+<!--                <attribute name="Main-Class" value="${main-class}"/>-->
+<!--            </manifest>-->
+<!--        </jar>-->
+<!--    </target>-->
+
+<!--    <target name="war" depends="jar">-->
+<!--        <war destfile = "fax.war" webxml = "${web.dir}/web.xml">-->
+<!--            <fileset dir = "${web.dir}/WebContent">-->
+<!--                <include name = "**/*.*"/>-->
+<!--            </fileset>-->
+
+<!--            <lib dir = "thirdpartyjars">-->
+<!--                <exclude name = "portlet.jar"/>-->
+<!--            </lib>-->
+
+<!--            <classes dir = "${build.dir}/web"/>-->
+<!--        </war>-->
+<!--    </target>-->
